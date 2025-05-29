@@ -60,7 +60,8 @@ const config: StorybookConfig = {
 				],
 			},
 		},
-        '@storybook/addon-webpack5-compiler-swc'
+        '@storybook/addon-webpack5-compiler-swc',
+        '@chromatic-com/storybook'
     ],
 	webpackFinal: async (config) => {
 		if (config?.resolve?.alias) {
@@ -83,8 +84,6 @@ const config: StorybookConfig = {
 			},
 		},
 	}),
-	docs: {
-		autodocs: 'tag',
-	},
+	docs: {},
 };
 export default config;
