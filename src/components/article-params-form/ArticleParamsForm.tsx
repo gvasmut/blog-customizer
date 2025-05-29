@@ -22,17 +22,16 @@ import { Separator } from 'src/ui/separator';
 import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 
 type ArticleParamsFormProps = {
-	formParams: ArticleStateType;
-	setFormParams: (params: ArticleStateType) => void;
-	onApply: () => void;
+	articleState: ArticleStateType;
+	setArticleState: (params: ArticleStateType) => void;
 };
 
 export const ArticleParamsForm = ({
-	formParams,
-	setFormParams,
-	onApply,
+	articleState,
+	setArticleState,
 }: ArticleParamsFormProps) => {
 	const [isFormOpen, setFormIsOpen] = useState(false);
+	const [formParams, setFormParams] = useState(articleState);
 	const rootRef = useRef<HTMLDivElement>(null);
 
 	useOutsideClickClose({
@@ -58,11 +57,12 @@ export const ArticleParamsForm = ({
 					className={styles.form}
 					onSubmit={(e) => {
 						e.preventDefault();
-						onApply();
+						setArticleState(formParams);
 						setFormIsOpen(false);
 					}}
 					onReset={() => {
 						setFormParams(defaultArticleState);
+						setArticleState(defaultArticleState);
 					}}>
 					<h2 className={styles.title}>Задайте параметры</h2>
 					<Select
